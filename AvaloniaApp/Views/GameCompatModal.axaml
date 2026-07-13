@@ -1,0 +1,60 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:AvaloniaApp.ViewModels"
+             xmlns:models="clr-namespace:AvaloniaApp.Models"
+             xmlns:conv="clr-namespace:Avalonia.Data.Converters;assembly=Avalonia.Base"
+             x:Class="AvaloniaApp.Views.GameCompatModal"
+             x:DataType="vm:GameCompatModalViewModel">
+    <UserControl.Resources>
+        <DataTemplate x:Key="GameEntryTemplate" DataType="models:GameCompatEntry">
+            <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="8" Padding="12" Margin="0,0,0,8">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" Foreground="{DynamicResource TextMainBrush}"/>
+                    <TextBlock Text="{Binding ProtonDbNote}" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap"
+                               IsVisible="{Binding ProtonDbNote, Converter={x:Static conv:StringConverters.IsNotNullOrEmpty}}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Border Background="#CC0F172A" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="12" Margin="64" MaxWidth="800" Padding="32" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" VerticalAlignment="Center">
+            <StackPanel Spacing="24">
+                <TextBlock Text="Game Compatibility" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource NavyBrush}"/>
+                <TextBlock Text="How your detected Steam library is expected to run on Linux, based on community ProtonDB reports." Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap"/>
+
+                <TextBlock Text="No Steam library was detected on this machine." Foreground="{DynamicResource TextMutedBrush}" FontStyle="Italic"
+                           IsVisible="{Binding HasNoGamesDetected}"/>
+
+                <ScrollViewer MaxHeight="420" IsVisible="{Binding !HasNoGamesDetected}">
+                    <StackPanel Spacing="24">
+                        <StackPanel Spacing="10" DataContext="{Binding RunsPerfectly}" x:DataType="vm:GameCompatTierViewModel" IsVisible="{Binding !IsEmpty}">
+                            <TextBlock Text="{Binding TierTitle}" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
+                            <ItemsControl ItemsSource="{Binding VisibleEntries}" ItemTemplate="{StaticResource GameEntryTemplate}"/>
+                            <Button Content="{Binding ExpandButtonText}" Background="Transparent" Foreground="{DynamicResource AccentBrush}" Cursor="Hand" Padding="0"
+                                    Command="{Binding ToggleExpandCommand}" IsVisible="{Binding HasMore}"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="10" DataContext="{Binding RunsFine}" x:DataType="vm:GameCompatTierViewModel" IsVisible="{Binding !IsEmpty}">
+                            <TextBlock Text="{Binding TierTitle}" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
+                            <ItemsControl ItemsSource="{Binding VisibleEntries}" ItemTemplate="{StaticResource GameEntryTemplate}"/>
+                            <Button Content="{Binding ExpandButtonText}" Background="Transparent" Foreground="{DynamicResource AccentBrush}" Cursor="Hand" Padding="0"
+                                    Command="{Binding ToggleExpandCommand}" IsVisible="{Binding HasMore}"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="10" DataContext="{Binding UnknownTier}" x:DataType="vm:GameCompatTierViewModel" IsVisible="{Binding !IsEmpty}">
+                            <TextBlock Text="{Binding TierTitle}" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
+                            <ItemsControl ItemsSource="{Binding VisibleEntries}" ItemTemplate="{StaticResource GameEntryTemplate}"/>
+                            <Button Content="{Binding ExpandButtonText}" Background="Transparent" Foreground="{DynamicResource AccentBrush}" Cursor="Hand" Padding="0"
+                                    Command="{Binding ToggleExpandCommand}" IsVisible="{Binding HasMore}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16" Margin="0,16,0,0">
+                    <Button Content="Close" Padding="24,12" Classes="Primary" Command="{Binding CloseCommand}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Border>
+</UserControl>

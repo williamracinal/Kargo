@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:AvaloniaApp.ViewModels"
+             xmlns:models="clr-namespace:AvaloniaApp.Models"
+             xmlns:conv="clr-namespace:Avalonia.Data.Converters;assembly=Avalonia.Base"
+             x:Class="AvaloniaApp.Views.AppTranslationModal"
+             x:DataType="vm:AppTranslationModalViewModel">
+    <Border Background="#CC0F172A" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="12" Margin="64" MaxWidth="800" Padding="32" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" VerticalAlignment="Center">
+            <StackPanel Spacing="24">
+                <TextBlock Text="Application Dictionary Setup" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource NavyBrush}"/>
+                <TextBlock Text="KARGO mapped your Windows apps to Linux equivalents. Uncheck any you don't want installed." Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap"/>
+
+                <ScrollViewer MaxHeight="360">
+                    <ItemsControl ItemsSource="{Binding Entries}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="models:AppTranslationEntry">
+                                <Grid ColumnDefinitions="Auto, *, Auto, *" Margin="0,0,0,16">
+                                    <CheckBox IsChecked="{Binding IsIncluded}" Grid.Column="0" Margin="0,0,16,0"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                                        <Border Width="32" Height="32" Background="{Binding SourceLogoColor}" CornerRadius="4">
+                                            <TextBlock Text="{Binding SourceLogoGlyph}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding SourceApp}" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <TextBlock Text="→" Grid.Column="2" VerticalAlignment="Center" Margin="16,0" FontSize="20" Foreground="{DynamicResource TextMutedBrush}"/>
+                                    <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="8">
+                                        <Border Width="32" Height="32" Background="{Binding TargetLogoColor}" CornerRadius="4">
+                                            <TextBlock Text="{Binding TargetLogoGlyph}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding TargetApp}" FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding TargetPackageManager}" FontSize="12" Foreground="{DynamicResource TextMutedBrush}"/>
+                                            <TextBlock Text="{Binding Explanation}" FontSize="11" FontStyle="Italic" Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap"
+                                                       IsVisible="{Binding Explanation, Converter={x:Static conv:StringConverters.IsNotNullOrEmpty}}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16" Margin="0,16,0,0">
+                    <Button Content="Close" Padding="24,12" Classes="Primary" Command="{Binding CloseCommand}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Border>
+</UserControl>

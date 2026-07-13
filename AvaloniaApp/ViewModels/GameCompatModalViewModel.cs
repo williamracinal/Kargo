@@ -6,6 +6,7 @@ using AvaloniaApp.Models;
 using AvaloniaApp.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Material.Icons;
 
 namespace AvaloniaApp.ViewModels;
 
@@ -19,7 +20,8 @@ public partial class GameCompatTierViewModel : ViewModelBase
     public bool IsEmpty => _all.Count == 0;
     public ObservableCollection<GameCompatEntry> VisibleEntries { get; } = new();
     public bool HasMore => _all.Count > CollapsedLimit;
-    public string ExpandButtonText => IsExpanded ? "Show less" : $"Show all {_all.Count} >";
+    public string ExpandButtonText => IsExpanded ? "Show less" : $"Show all {_all.Count}";
+    public MaterialIconKind ExpandIconKind => IsExpanded ? MaterialIconKind.ChevronUp : MaterialIconKind.ChevronDown;
 
     [ObservableProperty]
     private bool _isExpanded;
@@ -38,6 +40,7 @@ public partial class GameCompatTierViewModel : ViewModelBase
     {
         Refresh();
         OnPropertyChanged(nameof(ExpandButtonText));
+        OnPropertyChanged(nameof(ExpandIconKind));
     }
 
     private void Refresh()

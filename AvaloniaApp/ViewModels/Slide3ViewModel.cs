@@ -26,6 +26,8 @@ public partial class Slide3ViewModel : ViewModelBase
     public IRelayCommand OpenAppDictionaryCommand { get; }
     public IRelayCommand OpenGameCompatCommand { get; }
 
+    public string GameCompatSummaryText { get; }
+
     [ObservableProperty]
     private string _gpuStatusText = "Checking your hardware…";
 
@@ -35,11 +37,12 @@ public partial class Slide3ViewModel : ViewModelBase
     [ObservableProperty]
     private IBrush _gpuStatusColor = Brush.Parse("#64748B");
 
-    public Slide3ViewModel(MigrationState state, Action openAppDictionary, Action openGameCompat)
+    public Slide3ViewModel(MigrationState state, GameCompatModalViewModel gameCompat, Action openAppDictionary, Action openGameCompat)
     {
         _state = state;
         OpenAppDictionaryCommand = new RelayCommand(openAppDictionary);
         OpenGameCompatCommand = new RelayCommand(openGameCompat);
+        GameCompatSummaryText = BuildGameCompatSummary(gameCompat);
 
         BackupOptions = new ObservableCollection<ISelectableOption>
         {
@@ -47,14 +50,14 @@ public partial class Slide3ViewModel : ViewModelBase
             {
                 Value = true,
                 Title = "Cloud Provider",
-                Description = "Back up your files via Rclone.",
+                Description = "Transfer your files over Rclone. Fully automated.",
                 IconKind = MaterialIconKind.Cloud,
             },
             new SelectableOption<bool>(Select)
             {
                 Value = false,
                 Title = "External Drive",
-                Description = "Back up to a connected external drive.",
+                Description = "Transfer your files locally. Might require large amounts of free space.",
                 IconKind = MaterialIconKind.Harddisk,
             },
         };
@@ -63,6 +66,18 @@ public partial class Slide3ViewModel : ViewModelBase
 
         _state.PropertyChanged += OnStateChanged;
         UpdateGpuStatus();
+    }
+
+    private static string BuildGameCompatSummary(GameCompatModalViewModel gameCompat)
+    {
+        var runningWell = gameCompat.RunsPerfectly.Count + gameCompat.RunsFine.Count;
+        var total = runningWell + gameCompat.UnknownTier.Count;
+
+        if (total == 0)
+            return "No Steam library was detected on this PC.";
+
+        var percent = (int)Math.Round(runningWell * 100.0 / total);
+        return $"Your game library is {percent}% compatible.";
     }
 
     private void Select(bool value)
@@ -107,7 +122,7 @@ public partial class Slide3ViewModel : ViewModelBase
 
         if (_state.DetectedGpu == GpuManufacturer.Unknown)
         {
-            GpuStatusText = "We couldn't identify your GPU automatically. You can still continue.";
+            GpuStatusText = "We couldn't detect your GPU automatically. You can still continue.";
             GpuStatusIconKind = MaterialIconKind.InformationOutline;
             GpuStatusColor = Brush.Parse("#64748B");
             return;

@@ -2,9 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:AvaloniaApp.ViewModels"
              xmlns:models="clr-namespace:AvaloniaApp.Models"
+             xmlns:material="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:conv="clr-namespace:Avalonia.Data.Converters;assembly=Avalonia.Base"
              x:Class="AvaloniaApp.Views.GameCompatModal"
              x:DataType="vm:GameCompatModalViewModel">
+
     <UserControl.Resources>
         <DataTemplate x:Key="GameEntryTemplate" DataType="models:GameCompatEntry">
             <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="8" Padding="12" Margin="0,0,0,8">
@@ -14,6 +16,12 @@
                                IsVisible="{Binding ProtonDbNote, Converter={x:Static conv:StringConverters.IsNotNullOrEmpty}}"/>
                 </StackPanel>
             </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="ExpandButtonContent" DataType="vm:GameCompatTierViewModel">
+            <StackPanel Orientation="Horizontal" Spacing="4">
+                <TextBlock Text="{Binding ExpandButtonText}"/>
+                <material:MaterialIcon Kind="{Binding ExpandIconKind}" Width="16" Height="16" VerticalAlignment="Center"/>
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
@@ -31,28 +39,28 @@
                         <StackPanel Spacing="10" DataContext="{Binding RunsPerfectly}" x:DataType="vm:GameCompatTierViewModel" IsVisible="{Binding !IsEmpty}">
                             <TextBlock Text="{Binding TierTitle}" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
                             <ItemsControl ItemsSource="{Binding VisibleEntries}" ItemTemplate="{StaticResource GameEntryTemplate}"/>
-                            <Button Content="{Binding ExpandButtonText}" Background="Transparent" Foreground="{DynamicResource AccentBrush}" Cursor="Hand" Padding="0"
+                            <Button Classes="LinkButton" Content="{Binding}" ContentTemplate="{StaticResource ExpandButtonContent}"
                                     Command="{Binding ToggleExpandCommand}" IsVisible="{Binding HasMore}"/>
                         </StackPanel>
 
                         <StackPanel Spacing="10" DataContext="{Binding RunsFine}" x:DataType="vm:GameCompatTierViewModel" IsVisible="{Binding !IsEmpty}">
                             <TextBlock Text="{Binding TierTitle}" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
                             <ItemsControl ItemsSource="{Binding VisibleEntries}" ItemTemplate="{StaticResource GameEntryTemplate}"/>
-                            <Button Content="{Binding ExpandButtonText}" Background="Transparent" Foreground="{DynamicResource AccentBrush}" Cursor="Hand" Padding="0"
+                            <Button Classes="LinkButton" Content="{Binding}" ContentTemplate="{StaticResource ExpandButtonContent}"
                                     Command="{Binding ToggleExpandCommand}" IsVisible="{Binding HasMore}"/>
                         </StackPanel>
 
                         <StackPanel Spacing="10" DataContext="{Binding UnknownTier}" x:DataType="vm:GameCompatTierViewModel" IsVisible="{Binding !IsEmpty}">
                             <TextBlock Text="{Binding TierTitle}" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
                             <ItemsControl ItemsSource="{Binding VisibleEntries}" ItemTemplate="{StaticResource GameEntryTemplate}"/>
-                            <Button Content="{Binding ExpandButtonText}" Background="Transparent" Foreground="{DynamicResource AccentBrush}" Cursor="Hand" Padding="0"
+                            <Button Classes="LinkButton" Content="{Binding}" ContentTemplate="{StaticResource ExpandButtonContent}"
                                     Command="{Binding ToggleExpandCommand}" IsVisible="{Binding HasMore}"/>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16" Margin="0,16,0,0">
-                    <Button Content="Close" Padding="24,12" Classes="Primary" Command="{Binding CloseCommand}"/>
+                    <Button Content="Close" Classes="Primary" Command="{Binding CloseCommand}"/>
                 </StackPanel>
             </StackPanel>
         </Border>

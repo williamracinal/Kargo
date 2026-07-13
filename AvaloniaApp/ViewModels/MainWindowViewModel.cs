@@ -58,6 +58,7 @@ public partial class MainWindowViewModel : ViewModelBase
             new Slide2ViewModel(State),
             new Slide3ViewModel(
                 State,
+                GameCompatModal,
                 openAppDictionary: () => IsAppTranslationModalVisible = true,
                 openGameCompat: () => IsGameCompatModalVisible = true),
         };

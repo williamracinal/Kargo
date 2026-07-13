@@ -42,7 +42,7 @@
                 </ScrollViewer>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16" Margin="0,16,0,0">
-                    <Button Content="Close" Padding="24,12" Classes="Primary" Command="{Binding CloseCommand}"/>
+                    <Button Content="Close" Classes="Primary" Command="{Binding CloseCommand}"/>
                 </StackPanel>
             </StackPanel>
         </Border>

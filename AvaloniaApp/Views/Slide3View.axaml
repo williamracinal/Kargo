@@ -5,11 +5,11 @@
              xmlns:views="clr-namespace:AvaloniaApp.Views"
              x:Class="AvaloniaApp.Views.Slide3View"
              x:DataType="vm:Slide3ViewModel">
-    <StackPanel Spacing="14" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxWidth="1100" Margin="16">
+    <StackPanel Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxWidth="1100" Margin="16">
         <views:SlideHeader DataContext="{Binding Header}"/>
 
-        <Border Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="18" Margin="0,6,0,0">
-            <StackPanel Spacing="12">
+        <Border Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="16" Margin="0,4,0,0">
+            <StackPanel Spacing="10">
                 <!-- Diagnostics -->
                 <Grid ColumnDefinitions="Auto, *">
                     <material:MaterialIcon Grid.Column="0" Kind="{Binding GpuStatusIconKind}" Foreground="{Binding GpuStatusColor}" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,8,0"/>
@@ -18,23 +18,33 @@
 
                 <Grid ColumnDefinitions="Auto, *, Auto">
                     <material:MaterialIcon Grid.Column="0" Kind="Apps" Foreground="{DynamicResource AccentBrush}" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                    <TextBlock Grid.Column="1" Text="We found alternative Linux apps for your setup." Foreground="{DynamicResource TextMainBrush}" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                    <Button Grid.Column="2" Content="See which ones &gt;" Background="Transparent" Foreground="{DynamicResource AccentBrush}" Cursor="Hand" Command="{Binding OpenAppDictionaryCommand}" Padding="8,0,0,0" Margin="8,0,0,0"/>
+                    <TextBlock Grid.Column="1" Text="We will automatically install these Linux apps." Foreground="{DynamicResource TextMainBrush}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    <Button Grid.Column="2" Classes="LinkButton" Command="{Binding OpenAppDictionaryCommand}" Margin="8,0,0,0">
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <TextBlock Text="See which ones"/>
+                            <material:MaterialIcon Kind="ChevronRight" Width="16" Height="16" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
                 </Grid>
 
                 <Grid ColumnDefinitions="Auto, *, Auto">
                     <material:MaterialIcon Grid.Column="0" Kind="ControllerClassic" Foreground="{DynamicResource AccentBrush}" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                    <TextBlock Grid.Column="1" Text="Here's how your Steam library will run." Foreground="{DynamicResource TextMainBrush}" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                    <Button Grid.Column="2" Content="See which ones &gt;" Background="Transparent" Foreground="{DynamicResource AccentBrush}" Cursor="Hand" Command="{Binding OpenGameCompatCommand}" Padding="8,0,0,0" Margin="8,0,0,0"/>
+                    <TextBlock Grid.Column="1" Text="{Binding GameCompatSummaryText}" Foreground="{DynamicResource TextMainBrush}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    <Button Grid.Column="2" Classes="LinkButton" Command="{Binding OpenGameCompatCommand}" Margin="8,0,0,0">
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <TextBlock Text="See which ones"/>
+                            <material:MaterialIcon Kind="ChevronRight" Width="16" Height="16" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
                 </Grid>
 
-                <Separator Background="{DynamicResource BorderBrush}" Height="1" Margin="0,6"/>
+                <Separator Background="{DynamicResource BorderBrush}" Height="1" Margin="0,4"/>
 
-                <TextBlock Text="User Data Backup" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
+                <TextBlock Text="Data Migration" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
                 <ItemsControl ItemsSource="{Binding BackupOptionRows}" HorizontalAlignment="Stretch">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Spacing="16"/>
+                            <StackPanel Spacing="12"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>

@@ -40,15 +40,28 @@
                 <Border Grid.Row="1" Height="1" Background="{DynamicResource BorderBrush}"/>
 
                 <Grid Grid.Row="2" RowDefinitions="Auto,*" Margin="24">
-                    <!-- Progress Bar / Step -->
-                    <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,24">
-                        <ProgressBar Grid.Column="0" VerticalAlignment="Center" Margin="0,0,32,0"
-                                     Minimum="1" Maximum="3" Value="{Binding CurrentStep}"
-                                     Height="8" Foreground="{DynamicResource AccentBrush}" Background="{DynamicResource BorderBrush}"
-                                     CornerRadius="4"/>
-
-                        <TextBlock Grid.Column="1" Text="{Binding StepText}" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" FontWeight="SemiBold"/>
-                    </Grid>
+                    <!-- Step Indicator -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,24">
+                        <Border Classes="StepCircle"
+                                Classes.Current="{Binding CurrentStep, Converter={x:Static conv:StepComparisonConverter.EqualTo}, ConverterParameter=1}"
+                                Classes.Completed="{Binding CurrentStep, Converter={x:Static conv:StepComparisonConverter.GreaterThan}, ConverterParameter=1}">
+                            <TextBlock Text="1"/>
+                        </Border>
+                        <Border Classes="StepConnector"
+                                Classes.Completed="{Binding CurrentStep, Converter={x:Static conv:StepComparisonConverter.GreaterThan}, ConverterParameter=1}"/>
+                        <Border Classes="StepCircle"
+                                Classes.Current="{Binding CurrentStep, Converter={x:Static conv:StepComparisonConverter.EqualTo}, ConverterParameter=2}"
+                                Classes.Completed="{Binding CurrentStep, Converter={x:Static conv:StepComparisonConverter.GreaterThan}, ConverterParameter=2}">
+                            <TextBlock Text="2"/>
+                        </Border>
+                        <Border Classes="StepConnector"
+                                Classes.Completed="{Binding CurrentStep, Converter={x:Static conv:StepComparisonConverter.GreaterThan}, ConverterParameter=2}"/>
+                        <Border Classes="StepCircle"
+                                Classes.Current="{Binding CurrentStep, Converter={x:Static conv:StepComparisonConverter.EqualTo}, ConverterParameter=3}"
+                                Classes.Completed="{Binding CurrentStep, Converter={x:Static conv:StepComparisonConverter.GreaterThan}, ConverterParameter=3}">
+                            <TextBlock Text="3"/>
+                        </Border>
+                    </StackPanel>
 
                     <!-- Main Content Area with Transition -->
                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">

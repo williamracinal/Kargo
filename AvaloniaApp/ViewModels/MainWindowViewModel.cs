@@ -22,7 +22,6 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(CanGoBack))]
     [NotifyPropertyChangedFor(nameof(CanGoNext))]
     [NotifyPropertyChangedFor(nameof(IsLastStep))]
-    [NotifyPropertyChangedFor(nameof(StepText))]
     private int _currentStep = 1;
 
     [ObservableProperty]
@@ -40,7 +39,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public bool CanGoBack => CurrentStep > 1;
     public bool CanGoNext => CurrentStep < TotalSteps;
     public bool IsLastStep => CurrentStep == TotalSteps;
-    public string StepText => $"Step {CurrentStep} of {TotalSteps}";
 
     public MainWindowViewModel()
     {

@@ -88,16 +88,22 @@
             <Setter Property="CornerRadius" Value="6"/>
             <Setter Property="Padding" Value="24,12"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style Selector="Button.Primary /template/ ContentPresenter">
             <Setter Property="Transitions">
                 <Transitions>
                     <BrushTransition Property="Background" Duration="0:0:0.15"/>
-                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"/>
+                    <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.15"/>
                 </Transitions>
             </Setter>
         </Style>
-        <Style Selector="Button.Primary:pointerover">
+        <Style Selector="Button.Primary:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="#1D4ED8"/>
-            <Setter Property="RenderTransform" Value="scale(1.03)"/>
+            <Setter Property="BoxShadow" Value="0 4 12 0 #402563EB"/>
+        </Style>
+        <Style Selector="Button.Primary:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#1E40AF"/>
+            <Setter Property="BoxShadow" Value="0 1 2 0 #1A000000"/>
         </Style>
 
         <!-- Custom title bar caption buttons -->
@@ -167,6 +173,48 @@
         <Style Selector="Border.SelectableCard.Selected">
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
             <Setter Property="Background" Value="#F0F9FF"/>
+        </Style>
+
+        <!-- Step stepper: numbered circles connected by a line, used in place of a
+             plain progress bar so the wizard's step count and position read at a glance. -->
+        <Style Selector="Border.StepCircle">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Background" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.StepCircle > TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+        </Style>
+        <Style Selector="Border.StepCircle.Current, Border.StepCircle.Completed">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+        </Style>
+        <Style Selector="Border.StepCircle.Current > TextBlock, Border.StepCircle.Completed > TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Border.StepConnector">
+            <Setter Property="Width" Value="56"/>
+            <Setter Property="Height" Value="3"/>
+            <Setter Property="Background" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.StepConnector.Completed">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
         </Style>
     </Application.Styles>
 </Application>

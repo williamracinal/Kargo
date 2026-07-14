@@ -31,7 +31,7 @@ public class Slide1ViewModel : ViewModelBase
             Value = DesktopParadigm.MacOS,
             Title = "Centered Dock",
             Description = "macOS-style layout with bottom dock and top bar",
-            IconKind = MaterialIconKind.AppleFinder,
+            IconKind = MaterialIconKind.AppleKeyboardCommand,
         };
 
         SyncSelection();

@@ -22,8 +22,8 @@
   * *Options:* 
     1. Pure Gaming (Bazzite)
     2. Balanced Daily Use (Kubuntu)
-    3. Productivity & Dev (Fedora/Debian)
-    4. Enthusiast (CachyOS/Arch)
+    3. Productivity & Dev (Debian)
+    4. Enthusiast (Arch)
   * Update cadence (rock-solid vs. bleeding edge) is derived from this choice rather than asked as a separate step. Enthusiast implies bleeding-edge, everything else defaults to LTS.
 
 * **Slide 3: Confirmation & Execution**

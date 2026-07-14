@@ -45,15 +45,15 @@ public class Slide2ViewModel : ViewModelBase
                 Value = PrimaryRole.Productivity,
                 Title = "Productivity & Dev",
                 Description = "Coding, design, illustration, and photo editing.",
-                Caption = "(Fedora/Debian)",
-                IconKind = MaterialIconKind.HatFedora,
+                Caption = "(Debian)",
+                IconKind = MaterialIconKind.Debian,
             },
             new SelectableOption<PrimaryRole>(Select)
             {
                 Value = PrimaryRole.Enthusiast,
                 Title = "Enthusiast",
                 Description = "Bleeding-edge software and full control over your system. Requires hands-on maintenance.",
-                Caption = "(CachyOS/Arch)",
+                Caption = "(Arch)",
                 IconKind = MaterialIconKind.Arch,
             },
         };

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using AvaloniaApp.Models;
 using Material.Icons;
@@ -17,10 +18,18 @@ public class Slide2ViewModel : ViewModelBase
 
     public ObservableCollection<ISelectableOption> Options { get; }
     public IReadOnlyList<OptionRow> OptionRows { get; }
+    public SelectableOption<PrimaryRole> DailyUseOption { get; }
 
     public Slide2ViewModel(MigrationState state)
     {
         _state = state;
+
+        DailyUseOption = new SelectableOption<PrimaryRole>(Select)
+        {
+            Value = PrimaryRole.DailyUse,
+            Title = "Balanced Daily Use",
+            Description = "Web, media, everyday productivity, and casual gaming.",
+        };
 
         Options = new ObservableCollection<ISelectableOption>
         {
@@ -32,14 +41,7 @@ public class Slide2ViewModel : ViewModelBase
                 Caption = "(Bazzite)",
                 IconKind = MaterialIconKind.Linux,
             },
-            new SelectableOption<PrimaryRole>(Select)
-            {
-                Value = PrimaryRole.DailyUse,
-                Title = "Balanced Daily Use",
-                Description = "Web, media, everyday productivity, and casual gaming.",
-                Caption = "(Kubuntu)",
-                IconKind = MaterialIconKind.Ubuntu,
-            },
+            DailyUseOption,
             new SelectableOption<PrimaryRole>(Select)
             {
                 Value = PrimaryRole.Productivity,
@@ -59,6 +61,8 @@ public class Slide2ViewModel : ViewModelBase
         };
         OptionRows = OptionRow.Chunk(Options);
 
+        _state.PropertyChanged += OnStateChanged;
+        UpdateDailyUseOption();
         SyncSelection();
     }
 
@@ -75,5 +79,29 @@ public class Slide2ViewModel : ViewModelBase
     {
         foreach (var option in Options.Cast<SelectableOption<PrimaryRole>>())
             option.IsSelected = option.Value == _state.SelectedRole;
+    }
+
+    private void OnStateChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(MigrationState.SelectedParadigm))
+            UpdateDailyUseOption();
+    }
+
+    // Mint's Cinnamon desktop is Windows-like out of the box (bottom taskbar,
+    // start menu). Fedora is the reference GNOME distro, which needs a
+    // Dash-to-Dock-style extension for a macOS-like centered dock, but is
+    // GNOME-default and doesn't carry Ubuntu's Snap/Firefox-snap baggage.
+    private void UpdateDailyUseOption()
+    {
+        if (_state.SelectedParadigm == DesktopParadigm.MacOS)
+        {
+            DailyUseOption.Caption = "(Fedora)";
+            DailyUseOption.IconKind = MaterialIconKind.HatFedora;
+        }
+        else
+        {
+            DailyUseOption.Caption = "(Mint)";
+            DailyUseOption.IconKind = MaterialIconKind.LinuxMint;
+        }
     }
 }

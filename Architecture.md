@@ -21,10 +21,11 @@
 * **Slide 2: Primary Role**
   * *Options:* 
     1. Pure Gaming (Bazzite)
-    2. Balanced Daily Use (Kubuntu)
+    2. Balanced Daily Use (Mint if Slide 1's Windows-style layout was picked, Fedora if macOS-style was picked)
     3. Productivity & Dev (Debian)
     4. Enthusiast (Arch)
   * Update cadence (rock-solid vs. bleeding edge) is derived from this choice rather than asked as a separate step. Enthusiast implies bleeding-edge, everything else defaults to LTS.
+  * The Daily Use distro depends on the Slide 1 layout choice: Mint's Cinnamon desktop is Windows-like by default (bottom taskbar, start menu), so it needs no reconfiguration. Fedora is the reference GNOME distro (no Snap, no Amazon-lens history, reliable release model) but achieving the macOS-style centered dock on it requires first-boot provisioning to install and configure a Dash-to-Dock-style extension, not yet implemented (see §7).
 
 * **Slide 3: Confirmation & Execution**
   * *UI:* Dynamic diagnostic readouts ("Your Nvidia GPU is supported").

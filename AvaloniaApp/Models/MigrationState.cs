@@ -30,6 +30,13 @@ public enum GpuManufacturer
     Intel
 }
 
+public enum BackupMethod
+{
+    Rclone,
+    ExternalDrive,
+    None
+}
+
 public partial class MigrationState : ObservableObject
 {
     [ObservableProperty]
@@ -54,7 +61,7 @@ public partial class MigrationState : ObservableObject
     private bool _isDiagnosticsComplete;
 
     [ObservableProperty]
-    private bool _backupViaRclone = true;
+    private BackupMethod _selectedBackupMethod = BackupMethod.Rclone;
 
     [ObservableProperty]
     private string _targetUsbDrive = string.Empty;

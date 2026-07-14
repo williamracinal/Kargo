@@ -25,12 +25,13 @@
              regardless of which slide (and which generic SelectableOption<T>) it came from. -->
         <DataTemplate DataType="models:ISelectableOption">
             <Button Classes="CardButton" Command="{Binding SelectCommand}">
-                <Border Classes="SelectableCard" Classes.Selected="{Binding IsSelected}" MinWidth="240" MaxWidth="460" MinHeight="100" Margin="8">
+                <Border Classes="SelectableCard" Classes.Selected="{Binding IsSelected}" MinWidth="240" MaxWidth="460" MinHeight="88" Margin="6">
                     <Grid ColumnDefinitions="Auto, *">
                         <material:MaterialIcon Grid.Column="0" Kind="{Binding IconKind}" Width="44" Height="44" Foreground="{DynamicResource AccentBrush}" Margin="0,0,15,0" VerticalAlignment="Top"/>
                         <StackPanel Grid.Column="1" Spacing="5">
                             <TextBlock Text="{Binding Title}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
                             <TextBlock Text="{Binding Description}" FontSize="14" Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Caption}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextMutedBrush}" IsVisible="{Binding Caption, Converter={x:Static ObjectConverters.IsNotNull}}" Margin="0,4,0,0"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -176,7 +177,7 @@
             <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="18"/>
+            <Setter Property="Padding" Value="16"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Transitions">
                 <Transitions>

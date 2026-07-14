@@ -11,6 +11,7 @@ public interface ISelectableOption
 {
     string Title { get; }
     string Description { get; }
+    string? Caption { get; }
     MaterialIconKind IconKind { get; }
     bool IsSelected { get; set; }
     IRelayCommand SelectCommand { get; }
@@ -21,6 +22,7 @@ public partial class SelectableOption<T> : ObservableObject, ISelectableOption w
     public required T Value { get; init; }
     public required string Title { get; init; }
     public required string Description { get; init; }
+    public string? Caption { get; init; }
     public required MaterialIconKind IconKind { get; init; }
 
     [ObservableProperty]

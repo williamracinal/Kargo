@@ -1,5 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:material="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:vm="clr-namespace:AvaloniaApp.ViewModels"
              xmlns:views="clr-namespace:AvaloniaApp.Views"
              x:Class="AvaloniaApp.Views.Slide1View"
@@ -7,12 +8,25 @@
     <StackPanel Spacing="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="16" MaxWidth="1040">
         <views:SlideHeader DataContext="{Binding Header}"/>
 
-        <ItemsControl ItemsSource="{Binding OptionRows}" Margin="0,16,0,0" HorizontalAlignment="Stretch">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Spacing="16"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <Grid ColumnDefinitions="*,*" Margin="0,16,0,0" HorizontalAlignment="Stretch">
+            <Button Grid.Column="0" Classes="CardButton" Command="{Binding WindowsOption.SelectCommand}">
+                <Border Classes="SelectableCard" Classes.Selected="{Binding WindowsOption.IsSelected}" MinWidth="240" MaxWidth="460" MinHeight="140" Margin="8">
+                    <StackPanel Spacing="8" HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding WindowsOption.Title}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding WindowsOption.Description}" FontSize="14" Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap" TextAlignment="Center"/>
+                        <material:MaterialIcon Kind="{Binding WindowsOption.IconKind}" Width="40" Height="40" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+            <Button Grid.Column="1" Classes="CardButton" Command="{Binding MacOsOption.SelectCommand}">
+                <Border Classes="SelectableCard" Classes.Selected="{Binding MacOsOption.IsSelected}" MinWidth="240" MaxWidth="460" MinHeight="140" Margin="8">
+                    <StackPanel Spacing="8" HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding MacOsOption.Title}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding MacOsOption.Description}" FontSize="14" Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap" TextAlignment="Center"/>
+                        <material:MaterialIcon Kind="{Binding MacOsOption.IconKind}" Width="40" Height="40" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+        </Grid>
     </StackPanel>
 </UserControl>

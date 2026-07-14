@@ -28,7 +28,7 @@
 
 * **Slide 3: Confirmation & Execution**
   * *UI:* Dynamic diagnostic readouts ("Your Nvidia GPU is supported").
-  * *Interactions:* "See which ones >" links for apps/games. Toggle card for Cloud Provider (Rclone) vs. External Drive.
+  * *Interactions:* "See which ones >" links for apps/games. Toggle card for Cloud Provider (Rclone) vs. External Drive vs. skipping data migration entirely.
   * *Action:* Prominent blue "Start Migration >" button.
 
 ## 4. UX Modals (Data Translation)

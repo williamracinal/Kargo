@@ -22,6 +22,7 @@ public partial class Slide3ViewModel : ViewModelBase
 
     public ObservableCollection<ISelectableOption> BackupOptions { get; }
     public IReadOnlyList<OptionRow> BackupOptionRows { get; }
+    public SelectableOption<BackupMethod> SkipOption { get; }
 
     public IRelayCommand OpenAppDictionaryCommand { get; }
     public IRelayCommand OpenGameCompatCommand { get; }
@@ -44,24 +45,33 @@ public partial class Slide3ViewModel : ViewModelBase
         OpenGameCompatCommand = new RelayCommand(openGameCompat);
         GameCompatSummaryText = BuildGameCompatSummary(gameCompat);
 
+        SkipOption = new SelectableOption<BackupMethod>(Select)
+        {
+            Value = BackupMethod.None,
+            Title = "Skip for Now",
+            Description = "Continue without transferring any files.",
+            IconKind = MaterialIconKind.CloseCircleOutline,
+        };
+
         BackupOptions = new ObservableCollection<ISelectableOption>
         {
-            new SelectableOption<bool>(Select)
+            new SelectableOption<BackupMethod>(Select)
             {
-                Value = true,
+                Value = BackupMethod.Rclone,
                 Title = "Cloud Provider",
                 Description = "Transfer your files over Rclone. Fully automated.",
                 IconKind = MaterialIconKind.Cloud,
             },
-            new SelectableOption<bool>(Select)
+            new SelectableOption<BackupMethod>(Select)
             {
-                Value = false,
+                Value = BackupMethod.ExternalDrive,
                 Title = "External Drive",
                 Description = "Transfer your files locally. Might require large amounts of free space.",
                 IconKind = MaterialIconKind.Harddisk,
             },
+            SkipOption,
         };
-        BackupOptionRows = OptionRow.Chunk(BackupOptions);
+        BackupOptionRows = OptionRow.Chunk(BackupOptions.Take(2).ToList());
         SyncBackupSelection();
 
         _state.PropertyChanged += OnStateChanged;
@@ -80,16 +90,16 @@ public partial class Slide3ViewModel : ViewModelBase
         return $"Your game library is {percent}% compatible.";
     }
 
-    private void Select(bool value)
+    private void Select(BackupMethod value)
     {
-        _state.BackupViaRclone = value;
+        _state.SelectedBackupMethod = value;
         SyncBackupSelection();
     }
 
     private void SyncBackupSelection()
     {
-        foreach (var option in BackupOptions.Cast<SelectableOption<bool>>())
-            option.IsSelected = option.Value == _state.BackupViaRclone;
+        foreach (var option in BackupOptions.Cast<SelectableOption<BackupMethod>>())
+            option.IsSelected = option.Value == _state.SelectedBackupMethod;
     }
 
     private void OnStateChanged(object? sender, PropertyChangedEventArgs e)

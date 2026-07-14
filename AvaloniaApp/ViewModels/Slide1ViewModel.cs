@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using AvaloniaApp.Models;
 using Material.Icons;
 
@@ -15,31 +12,27 @@ public class Slide1ViewModel : ViewModelBase
         "Choose your desktop layout",
         "How do you prefer to navigate your system?");
 
-    public ObservableCollection<ISelectableOption> Options { get; }
-    public IReadOnlyList<OptionRow> OptionRows { get; }
+    public SelectableOption<DesktopParadigm> WindowsOption { get; }
+    public SelectableOption<DesktopParadigm> MacOsOption { get; }
 
     public Slide1ViewModel(MigrationState state)
     {
         _state = state;
 
-        Options = new ObservableCollection<ISelectableOption>
+        WindowsOption = new SelectableOption<DesktopParadigm>(Select)
         {
-            new SelectableOption<DesktopParadigm>(Select)
-            {
-                Value = DesktopParadigm.Windows,
-                Title = "Bottom Taskbar",
-                Description = "Windows-style layout",
-                IconKind = MaterialIconKind.PageLayoutSidebarLeft,
-            },
-            new SelectableOption<DesktopParadigm>(Select)
-            {
-                Value = DesktopParadigm.MacOS,
-                Title = "Centered Dock",
-                Description = "macOS-style layout with bottom dock and top bar",
-                IconKind = MaterialIconKind.DockBottom,
-            },
+            Value = DesktopParadigm.Windows,
+            Title = "Bottom Taskbar",
+            Description = "Windows-style layout",
+            IconKind = MaterialIconKind.MicrosoftWindowsClassic,
         };
-        OptionRows = OptionRow.Chunk(Options);
+        MacOsOption = new SelectableOption<DesktopParadigm>(Select)
+        {
+            Value = DesktopParadigm.MacOS,
+            Title = "Centered Dock",
+            Description = "macOS-style layout with bottom dock and top bar",
+            IconKind = MaterialIconKind.AppleFinder,
+        };
 
         SyncSelection();
     }
@@ -52,7 +45,7 @@ public class Slide1ViewModel : ViewModelBase
 
     private void SyncSelection()
     {
-        foreach (var option in Options.Cast<SelectableOption<DesktopParadigm>>())
-            option.IsSelected = option.Value == _state.SelectedParadigm;
+        WindowsOption.IsSelected = WindowsOption.Value == _state.SelectedParadigm;
+        MacOsOption.IsSelected = MacOsOption.Value == _state.SelectedParadigm;
     }
 }

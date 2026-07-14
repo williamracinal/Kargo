@@ -29,28 +29,32 @@ public class Slide2ViewModel : ViewModelBase
                 Value = PrimaryRole.Gaming,
                 Title = "Pure Gaming",
                 Description = "Optimized for a console-like experience, with smooth performance and vivid visuals.",
-                IconKind = MaterialIconKind.ControllerClassic,
+                Caption = "(Bazzite)",
+                IconKind = MaterialIconKind.Linux,
             },
             new SelectableOption<PrimaryRole>(Select)
             {
                 Value = PrimaryRole.DailyUse,
                 Title = "Balanced Daily Use",
                 Description = "Web, media, everyday productivity, and casual gaming.",
-                IconKind = MaterialIconKind.Home,
+                Caption = "(Kubuntu)",
+                IconKind = MaterialIconKind.Ubuntu,
             },
             new SelectableOption<PrimaryRole>(Select)
             {
                 Value = PrimaryRole.Productivity,
                 Title = "Productivity & Dev",
                 Description = "Coding, design, illustration, and photo editing.",
-                IconKind = MaterialIconKind.CodeBraces,
+                Caption = "(Fedora/Debian)",
+                IconKind = MaterialIconKind.HatFedora,
             },
             new SelectableOption<PrimaryRole>(Select)
             {
                 Value = PrimaryRole.Enthusiast,
                 Title = "Enthusiast",
                 Description = "Bleeding-edge software and full control over your system. Requires hands-on maintenance.",
-                IconKind = MaterialIconKind.RocketLaunch,
+                Caption = "(CachyOS/Arch)",
+                IconKind = MaterialIconKind.Arch,
             },
         };
         OptionRows = OptionRow.Chunk(Options);

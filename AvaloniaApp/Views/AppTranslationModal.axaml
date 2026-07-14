@@ -7,11 +7,11 @@
              x:DataType="vm:AppTranslationModalViewModel">
     <Border Background="#CC0F172A" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="12" Margin="64" MaxWidth="800" Padding="32" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" VerticalAlignment="Center">
-            <StackPanel Spacing="24">
-                <TextBlock Text="Application Dictionary Setup" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource NavyBrush}"/>
-                <TextBlock Text="KARGO mapped your Windows apps to Linux equivalents. Uncheck any you don't want installed." Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap"/>
+            <Grid RowDefinitions="Auto,Auto,*,Auto">
+                <TextBlock Grid.Row="0" Text="Application Dictionary Setup" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource NavyBrush}" Margin="0,0,0,24"/>
+                <TextBlock Grid.Row="1" Text="KARGO mapped your Windows apps to Linux equivalents. Uncheck any you don't want installed." Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap" Margin="0,0,0,24"/>
 
-                <ScrollViewer MaxHeight="360">
+                <ScrollViewer Grid.Row="2" VerticalAlignment="Top">
                     <ItemsControl ItemsSource="{Binding Entries}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="models:AppTranslationEntry">
@@ -41,10 +41,10 @@
                     </ItemsControl>
                 </ScrollViewer>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16" Margin="0,16,0,0">
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16" Margin="0,16,0,0">
                     <Button Content="Close" Classes="Primary" Command="{Binding CloseCommand}"/>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
         </Border>
     </Border>
 </UserControl>

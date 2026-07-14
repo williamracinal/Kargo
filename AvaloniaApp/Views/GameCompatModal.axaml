@@ -27,14 +27,14 @@
 
     <Border Background="#CC0F172A" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="12" Margin="64" MaxWidth="800" Padding="32" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" VerticalAlignment="Center">
-            <StackPanel Spacing="24">
-                <TextBlock Text="Game Compatibility" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource NavyBrush}"/>
-                <TextBlock Text="How your detected Steam library is expected to run on Linux, based on community ProtonDB reports." Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap"/>
+            <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+                <TextBlock Grid.Row="0" Text="Game Compatibility" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource NavyBrush}" Margin="0,0,0,24"/>
+                <TextBlock Grid.Row="1" Text="How your detected Steam library is expected to run on Linux, based on community ProtonDB reports." Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap" Margin="0,0,0,24"/>
 
-                <TextBlock Text="No Steam library was detected on this machine." Foreground="{DynamicResource TextMutedBrush}" FontStyle="Italic"
+                <TextBlock Grid.Row="2" Text="No Steam library was detected on this machine." Foreground="{DynamicResource TextMutedBrush}" FontStyle="Italic"
                            IsVisible="{Binding HasNoGamesDetected}"/>
 
-                <ScrollViewer MaxHeight="420" IsVisible="{Binding !HasNoGamesDetected}">
+                <ScrollViewer Grid.Row="3" VerticalAlignment="Top" IsVisible="{Binding !HasNoGamesDetected}">
                     <StackPanel Spacing="24">
                         <StackPanel Spacing="10" DataContext="{Binding RunsPerfectly}" x:DataType="vm:GameCompatTierViewModel" IsVisible="{Binding !IsEmpty}">
                             <TextBlock Text="{Binding TierTitle}" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}"/>
@@ -59,10 +59,10 @@
                     </StackPanel>
                 </ScrollViewer>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16" Margin="0,16,0,0">
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16" Margin="0,16,0,0">
                     <Button Content="Close" Classes="Primary" Command="{Binding CloseCommand}"/>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
         </Border>
     </Border>
 </UserControl>

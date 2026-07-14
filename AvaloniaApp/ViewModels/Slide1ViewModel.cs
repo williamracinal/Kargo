@@ -24,14 +24,14 @@ public class Slide1ViewModel : ViewModelBase
             Value = DesktopParadigm.Windows,
             Title = "Bottom Taskbar",
             Description = "Windows-style layout",
-            IconKind = MaterialIconKind.MicrosoftWindowsClassic,
+            IconKind = MaterialIconKind.PageLayoutFooter,
         };
         MacOsOption = new SelectableOption<DesktopParadigm>(Select)
         {
             Value = DesktopParadigm.MacOS,
             Title = "Centered Dock",
             Description = "macOS-style layout with bottom dock and top bar",
-            IconKind = MaterialIconKind.AppleKeyboardCommand,
+            IconKind = MaterialIconKind.PageLayoutHeaderFooter,
         };
 
         SyncSelection();

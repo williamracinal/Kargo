@@ -1,6 +1,5 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:material="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:vm="clr-namespace:AvaloniaApp.ViewModels"
              xmlns:views="clr-namespace:AvaloniaApp.Views"
              x:Class="AvaloniaApp.Views.Slide1View"
@@ -14,7 +13,10 @@
                     <StackPanel Spacing="8" HorizontalAlignment="Center">
                         <TextBlock Text="{Binding WindowsOption.Title}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}" HorizontalAlignment="Center"/>
                         <TextBlock Text="{Binding WindowsOption.Description}" FontSize="14" Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap" TextAlignment="Center"/>
-                        <material:MaterialIcon Kind="{Binding WindowsOption.IconKind}" Width="40" Height="40" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <!-- Mini screen mockup: a bar spanning the full bottom edge, like a taskbar. -->
+                        <Border Width="72" Height="44" CornerRadius="4" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="2" Background="{DynamicResource BackgroundBrush}" HorizontalAlignment="Center" Margin="0,8,0,0" ClipToBounds="True">
+                            <Border VerticalAlignment="Bottom" Height="10" Background="{DynamicResource AccentBrush}"/>
+                        </Border>
                     </StackPanel>
                 </Border>
             </Button>
@@ -23,7 +25,13 @@
                     <StackPanel Spacing="8" HorizontalAlignment="Center">
                         <TextBlock Text="{Binding MacOsOption.Title}" FontSize="17" FontWeight="Bold" Foreground="{DynamicResource TextMainBrush}" HorizontalAlignment="Center"/>
                         <TextBlock Text="{Binding MacOsOption.Description}" FontSize="14" Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap" TextAlignment="Center"/>
-                        <material:MaterialIcon Kind="{Binding MacOsOption.IconKind}" Width="40" Height="40" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                        <!-- Mini screen mockup: a thin top menu bar plus a small centered dock pill. -->
+                        <Border Width="72" Height="44" CornerRadius="4" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="2" Background="{DynamicResource BackgroundBrush}" HorizontalAlignment="Center" Margin="0,8,0,0" ClipToBounds="True">
+                            <Grid>
+                                <Border VerticalAlignment="Top" Height="6" Background="{DynamicResource AccentBrush}"/>
+                                <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="26" Height="8" CornerRadius="4" Background="{DynamicResource AccentBrush}" Margin="0,0,0,4"/>
+                            </Grid>
+                        </Border>
                     </StackPanel>
                 </Border>
             </Button>

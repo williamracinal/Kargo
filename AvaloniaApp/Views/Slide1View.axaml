@@ -31,9 +31,9 @@
                         <TextBlock Text="{Binding MacOsOption.Description}" FontSize="14" Foreground="{DynamicResource TextMutedBrush}" TextWrapping="Wrap" TextAlignment="Center"/>
                         <!-- Mini monitor mockup: neutral screen frame, accent-colored top bar plus a small centered dock pill. -->
                         <StackPanel HorizontalAlignment="Center" Margin="0,8,0,0">
-                            <Border Width="72" Height="44" CornerRadius="4" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="2" Background="{DynamicResource SurfaceBrush}" ClipToBounds="True">
+                            <Border Width="72" Height="44" CornerRadius="4" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="2" Background="{DynamicResource SurfaceBrush}">
                                 <Grid>
-                                    <Border VerticalAlignment="Top" Height="6" Background="{DynamicResource AccentBrush}"/>
+                                    <Border VerticalAlignment="Top" Height="4" CornerRadius="2,2,0,0" Background="{DynamicResource AccentBrush}"/>
                                     <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="24" Height="7" CornerRadius="3.5" Margin="0,0,0,4" Background="{DynamicResource AccentBrush}"/>
                                 </Grid>
                             </Border>

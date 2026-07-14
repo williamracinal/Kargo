@@ -90,6 +90,7 @@
             <Setter Property="Padding" Value="28,14"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
         <Style Selector="Button.Primary /template/ ContentPresenter">
             <Setter Property="BoxShadow" Value="0 2 6 0 #262563EB"/>
